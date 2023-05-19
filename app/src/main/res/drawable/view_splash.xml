@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <color android:color="#FFFFFF" />
+    </item>
+    <item
+        android:drawable="@drawable/logo_github"
+        android:gravity="center"
+        android:bottom="350dp"
+        android:left="220dp"
+        android:right="220dp"
+        android:top="350dp" />
+</layer-list>

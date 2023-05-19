@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">DesafioCarrefour</string>
+
+    <string name="label_user_search_fragment">Search Fragment</string>
+    <string name="label_user_details_fragment">Details Fragment</string>
+
+    <string name="label_insert_here">Search user here…</string>
+
+    <string name="title_toolbar_details">Details</string>
+
+    <string name="label_watch">Watch</string>
+    <string name="label_forks">Forks</string>
+    <string name="label_stars">Stars</string>
+
+    <string name="label_followers">Followers</string>
+    <string name="label_following">Following</string>
+
+    <string name="label_repos">Repos</string>
+    <string name="label_repositories">Repositories</string>
+
+    <string name="label_no_results">No results.</string>
+    <string name="label_error">Oops! An error has occurred.</string>
 </resources>
