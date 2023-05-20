@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">DesafioCarrefour</string>
 
-    <string name="label_user_search_fragment">Search Fragment</string>
+    <string name="label_user_fragment">User Fragment</string>
     <string name="label_user_details_fragment">Details Fragment</string>
 
     <string name="label_insert_here">Search user here…</string>
