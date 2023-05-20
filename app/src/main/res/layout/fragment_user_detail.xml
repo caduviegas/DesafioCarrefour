@@ -1,85 +1,244 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/containerRoot"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:ignore="MissingDefaultResource">
 
-    <LinearLayout
-        android:id="@+id/containerSearch"
+    <data>
+        <variable
+            name="viewModel"
+            type="com.innaval.desafiocarrefour.presentation.user.detail.UserDetailsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/imageLogo"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginTop="60dp"
-            android:importantForAccessibility="no"
-            android:src="@drawable/logo_github" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inputLayoutSearch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="24dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="40dp"
-            app:endIconDrawable="@drawable/ic_search"
-            app:endIconMode="custom">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputSearch"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/label_insert_here"
-                android:inputType="text"
-                android:maxLines="1" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-    </LinearLayout>
-
-    <ViewFlipper
-        android:id="@+id/viewFlipper"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/containerSearch">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_arrow_left"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            tools:title="Detalhes" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipeRefreshSearch"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/black"
-            android:padding="16dp">
+            android:id="@+id/swipeRefreshDetails"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:padding="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/toolbar">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewUsers"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:orientation="vertical"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:itemCount="4"
-                tools:listitem="@layout/item_user" />
+            <ViewFlipper
+                android:id="@+id/viewFlipperAll"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <include layout="@layout/content_progressbar" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/contentViewFlipperAll"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="54dp">
+
+                    <ImageView
+                        android:id="@+id/userAvatar"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_marginTop="54dp"
+                        android:importantForAccessibility="no"
+                        android:scaleType="centerCrop"
+                        app:circleImage="@{viewModel.userModel.avatarUrl}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:srcCompat="@tools:sample/avatars" />
+
+                    <TextView
+                        android:id="@+id/userName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="@{viewModel.userModel.name}"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="@+id/userAvatar"
+                        app:layout_constraintStart_toStartOf="@+id/userAvatar"
+                        app:layout_constraintTop_toBottomOf="@+id/userAvatar"
+                        tools:text="Name User" />
+
+                    <TextView
+                        android:id="@+id/userLogin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{viewModel.userModel.login}"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="@+id/userName"
+                        app:layout_constraintStart_toStartOf="@+id/userName"
+                        app:layout_constraintTop_toBottomOf="@+id/userName"
+                        tools:text="userlogin" />
+
+                    <TextView
+                        android:id="@+id/userFollowers"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="28dp"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:maxWidth="100dp"
+                        android:maxLines="1"
+                        android:minWidth="40dp"
+                        android:padding="4dp"
+                        android:text="@{viewModel.userModel.followers.toString()}"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/userPublicRepos"
+                        app:layout_constraintEnd_toStartOf="@+id/userPublicRepos"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/userPublicRepos"
+                        tools:text="1.111" />
+
+                    <TextView
+                        android:id="@+id/userPublicRepos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:maxWidth="100dp"
+                        android:maxLines="1"
+                        android:minWidth="40dp"
+                        android:padding="4dp"
+                        android:text="@{viewModel.userModel.publicRepos.toString()}"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="@+id/userLogin"
+                        app:layout_constraintStart_toStartOf="@+id/userLogin"
+                        app:layout_constraintTop_toBottomOf="@+id/userLogin"
+                        tools:text="22.222" />
+
+                    <TextView
+                        android:id="@+id/userFollowing"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="28dp"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:maxWidth="100dp"
+                        android:maxLines="1"
+                        android:minWidth="40dp"
+                        android:padding="4dp"
+                        android:text="@{viewModel.userModel.following.toString()}"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/userPublicRepos"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toEndOf="@+id/userPublicRepos"
+                        app:layout_constraintTop_toTopOf="@+id/userPublicRepos"
+                        tools:text="333.333" />
+
+                    <TextView
+                        android:id="@+id/userFollowersLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_followers"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="@+id/userFollowers"
+                        app:layout_constraintStart_toStartOf="@+id/userFollowers"
+                        app:layout_constraintTop_toBottomOf="@+id/userFollowers" />
+
+                    <TextView
+                        android:id="@+id/userPublicReposLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_repos"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="@+id/userPublicRepos"
+                        app:layout_constraintStart_toStartOf="@+id/userPublicRepos"
+                        app:layout_constraintTop_toBottomOf="@+id/userPublicRepos" />
+
+                    <TextView
+                        android:id="@+id/userFollowingLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_following"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="@+id/userFollowing"
+                        app:layout_constraintStart_toStartOf="@+id/userFollowing"
+                        app:layout_constraintTop_toBottomOf="@+id/userFollowing" />
+
+                    <View
+                        android:id="@+id/separatorView"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="32dp"
+                        android:background="@color/colorPrimary"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/userPublicReposLabel" />
+
+                    <ViewFlipper
+                        android:id="@+id/viewFlipperUserRepos"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/separatorView">
+
+                        <LinearLayout
+                            android:id="@+id/containerUserRepos"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/colorPrimary"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="16dp"
+                            android:paddingTop="12dp">
+
+                            <TextView
+                                android:id="@+id/labelRepositories"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:text="@string/label_repositories"
+                                android:textColor="@color/white"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recyclerViewUserRepos"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="8dp"
+                                android:orientation="vertical"
+                                android:paddingHorizontal="24dp"
+                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                tools:itemCount="1"
+                                tools:listitem="@layout/item_user_repository" />
+
+                        </LinearLayout>
+
+                        <include layout="@layout/content_no_results" />
+
+                    </ViewFlipper>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <include layout="@layout/content_error" />
+
+            </ViewFlipper>
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-        <include layout="@layout/content_no_results" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </ViewFlipper>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
