@@ -1,4 +1,4 @@
-package com.innaval.desafiocarrefour.presentation
+package com.innaval.desafiocarrefour.presentation.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
