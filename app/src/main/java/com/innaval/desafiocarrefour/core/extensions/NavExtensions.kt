@@ -6,6 +6,7 @@ import androidx.annotation.NonNull
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
+import com.innaval.desafiocarrefour.R
 
 private val navOptions = NavOptions.Builder()
     .setEnterAnim(R.anim.slide_in_right)

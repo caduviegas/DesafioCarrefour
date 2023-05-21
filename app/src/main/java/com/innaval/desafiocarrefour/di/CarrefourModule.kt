@@ -10,6 +10,7 @@ import com.innaval.desafiocarrefour.domain.usecase.UserRepositoryUseCaseImplemen
 import com.innaval.desafiocarrefour.domain.usecase.UserUseCase
 import com.innaval.desafiocarrefour.domain.usecase.UserUseCaseImplementation
 import com.innaval.desafiocarrefour.presentation.user.detail.UserDetailsViewModel
+import com.innaval.desafiocarrefour.presentation.user.search.UserViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -47,6 +48,6 @@ private val repositoriesModule = module {
 }
 
 private val viewModelsModule = module {
-
+    viewModel { UserViewModel(get(), get()) }
     viewModel { UserDetailsViewModel(get(), get()) }
 }
