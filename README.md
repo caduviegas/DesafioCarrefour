@@ -57,6 +57,16 @@ Tire um tempo para entender tudo e faça um planejamento. Um bom projeto é frut
 
 ## Funcionamento
 
+A primeira tela do Aplicativo é possivel ver a logo do github, um espaço para pesquisas e uma lista com usuários e seus repositorios.
 
+<img src="img1.jpeg" width="200">
+
+Ao digitar um nome e buscar a tela atualiza mostrando o usuário caso este esteja com uma conta no github.
+
+<img src="img2.jpeg" width="200">
+
+Por fim pode-se clicar no usuário da pequisa ou nos da tela inicial para poder acessar a tela de detalhes do usuário, com seus repositories e informações
+
+<img src="img3.jpeg" width="200">
 
 
